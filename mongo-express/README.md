@@ -19,28 +19,7 @@ Then the MongoExpress pod will be created referencing the MongoDB service URL by
 
 Finally k3d will have an ingress defines exposing the mongo-express service outside the cluster.
 
-### Install K3D
-
-k3d is a lightweight wrapper to run k3s (Rancher Lab’s minimal Kubernetes distribution) in docker.
-
-k3d makes it very easy to create single- and multi-node k3s clusters in docker, e.g. for local development on Kubernetes.
-
-Install instructions [here](https://k3d.io)
-
-### Deploy MongoDB Demo Kluster
-
-Now we are ready to deploy the differnet modules on to our kubernetes cluster.
-
-**Create cluster**
-
-First we need to start create the cluster.
-When running the below command from the project root folder, a 1 server, 4 agent k3s cluster will be created on your local machine.
-
-    $ k3d cluster create --config k3d.yaml
-
-Test the state of the cluster by running this command
-
-    $ kubectl get nodes
+**Make sure your k3d cluster is up and running**
 
 **Deploy Secrets**
 
@@ -117,9 +96,3 @@ This will only delete the deployments, pods, services and replicasets.The secret
 
     $ kubectl delete configmaps mongodb-configmap
     $ kubectl delete secrets mongodb-secret
-
-**Delete Cluster**
-
-Delete the k3d cluster with the following command
-
-    $ k3d cluster delete --config k3d.yaml
