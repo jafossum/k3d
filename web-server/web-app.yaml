@@ -18,7 +18,7 @@ spec:
         - name: web-app
           image: ghcr.io/jafossum/simple-web-server:latest
           ports:
-            - containerPort: 8088
+            - containerPort: 8080
 
 ---
 apiVersion: v1
