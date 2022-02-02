@@ -1,0 +1,36 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: web-app-gateway
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: web-app
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - web-app-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /status
+        - uri:
+            prefix: /ping
+      route:
+        - destination:
+            port:
+              number: 80
+            host: web-app-service
