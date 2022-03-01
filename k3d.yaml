@@ -2,7 +2,7 @@ apiVersion: k3d.io/v1alpha3 # this will change in the future as we make everythi
 kind: Simple # internally, we also have a Cluster config, which is not yet available externally
 name: MyAwesomeCluster # name that you want to give to your cluster (will still be prefixed with `k3d-`)
 servers: 1 # same as `--servers 1`
-agents: 1 # same as `--agents 4`
+agents: 4 # same as `--agents 4`
 ports:
   - port: 8080:80 # same as `--port '8080:80@loadbalancer'`
     nodeFilters:
