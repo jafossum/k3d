@@ -1,6 +1,7 @@
-apiVersion: k3d.io/v1alpha3 # this will change in the future as we make everything more stable
+apiVersion: k3d.io/v1alpha4 # this will change in the future as we make everything more stable
 kind: Simple # internally, we also have a Cluster config, which is not yet available externally
-name: MyAwesomeCluster # name that you want to give to your cluster (will still be prefixed with `k3d-`)
+metadata:  
+  name: MyAwesomeCluster # name that you want to give to your cluster (will still be prefixed with `k3d-`)
 servers: 1 # same as `--servers 1`
 agents: 4 # same as `--agents 4`
 ports:

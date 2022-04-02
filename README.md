@@ -18,6 +18,10 @@ Test the state of the cluster by running this command
 
     $ kubectl get nodes
 
-Destroy / Dlete the cluster using the following command
+List available clusters
 
-    $ k3d cluster delete --config k3d.yaml
+    $ k3d cluster list
+
+Destroy / Delete the cluster using the following command
+
+    $ k3d cluster delete MyAwesomeCluster
