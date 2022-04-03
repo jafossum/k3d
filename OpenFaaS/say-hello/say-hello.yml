@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  say-hello:
+    lang: python3-http
+    handler: ./say-hello
+    image: ghcr.io/jafossum/say-hello:latest
+
