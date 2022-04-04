@@ -46,12 +46,24 @@ Push your code to OpenFaaS
 
     faas-cli up -f bcrypt-validate.yml
 
-## Invoke your function
+## Synchronously invoke your function
 
 Invoke your function through the OpenFaaS web console, curl, or with faas-cli
 (Remember to put a `\` before each \$ in the resulting hash in the JSON request)
 
-    curl -d "{\"text\":\"some-passwd\",\"hash\":\"\$2a\$10\$vftrptYx21rjd3v09Vhmn.Gw3dsDDxzY6RD.hA10KfgCuYltV9.wq\"}" http://127.0.0.1:8080/function/bcrypt-validate
+    curl http://127.0.0.1:8080/function/bcrypt-validate -d "{\"text\":\"some-passwd\",\"hash\":\"\$2a\$10\$vftrptYx21rjd3v09Vhmn.Gw3dsDDxzY6RD.hA10KfgCuYltV9.wq\"}"
+
+## Asynchronously invoce your function
+
+For this to work you need a webserver listening on port `:8888` on your IP.
+in the `OpenFaas/web` there is small GO function for testing this.
+
+    cd ../web
+    go run web.go
+
+Invoke your function with curl by calling `/async-function/bcrypt-validate`
+
+    curl http://127.0.0.1:8080/async-function/bcrypt-validate -d "{\"text\":\"some-passwd\",\"hash\":\"\$2a\$10\$vftrptYx21rjd3v09Vhmn.Gw3dsDDxzY6RD.hA10KfgCuYltV9.wq\"}" -H "X-Callback-Url: http://<YOUR-IP>:8888"
 
 ### Test with Docker
 

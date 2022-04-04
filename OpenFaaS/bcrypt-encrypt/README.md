@@ -48,11 +48,23 @@ Push your code to OpenFaaS
 
     faas-cli up -f bcrypt-encrypt.yml
 
-## Invoke your function
+## Synchronously Invoke your function
 
 Invoke your function through the OpenFaaS web console or with curl
 
-    curl -d "{\"encrypt\":\"some-passwd\",\"cost\":10}" http://127.0.0.1:8080/function/bcrypt-encrypt
+    curl http://127.0.0.1:8080/function/bcrypt-encrypt -d "{\"encrypt\":\"some-passwd\",\"cost\":10}"
+
+## Asynchronously Invoce your function
+
+For this to work you need a webserver listening on port `:8888` on your IP.
+in the `OpenFaas/web` there is small GO function for testing this.
+
+    cd ../web
+    go run web.go
+
+Invoke your function with curl by calling `/async-function/bcrypt-encrypt`
+
+    curl http://127.0.0.1:8080/async-function/bcrypt-encrypt -d "{\"encrypt\":\"some-passwd\",\"cost\":10}" -H "X-Callback-Url: http://<YOUR-IP>:8888"
 
 ### Test with Docker
 
