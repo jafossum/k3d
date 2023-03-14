@@ -5,10 +5,7 @@
 if [[ ! -d "istio" ]]
 then
     echo "./istio does not exist on your filesystem - downloading"
-    VERSION_ISTO=1.12.2
-
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=$VERSION_ISTO sh -
-    mv istio-$VERSION_ISTO istio
+    /bin/bash ./download-istio.sh
 else
     echo "installing istio from ./istio folder"
 fi

@@ -39,6 +39,23 @@ Deploy the Istio Gateway and VirtualService to get access to the service endpoin
 
     $ kubectl apply -f istio-ingress.yaml
 
+### Test Ingress Status
+
+There might be some conflict with Traefik and Istio when it comes to ports and LoadBalancer service mapping when running Istio on K3D.
+
+Run this command to check the Istio Ingress Gateway setup:
+
+    kubectl get svc istio-ingressgateway -n istio-system
+
+If the `EXTERNAL-IP` says `<pending>` after applying the ingress rules, then there might be a conflict with the Traefik LoadBalancer service.
+This can be removed, as we are not using it
+
+    kubectl delete service traefik -n kube-system
+
+When this LoadBalancing service has been successfully removed, we can check if the Ingress has an `EXTERNAL-IP`set
+
+    kubectl get svc istio-ingressgateway -n istio-system
+
 ## Test Setup
 
 Open your browser, and go to either `http://localhost:8080/status`, or `http://localhost:8080/ping`.
